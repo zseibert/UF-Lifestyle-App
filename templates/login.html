@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    
+</head>  
+    <body style="background-image: url('https://arts.ufl.edu/site/assets/files/30173/0001-1.1840x1036p50x50.jpg'); background-size:cover;">
+<nav class="navbar fixed-top navbar-light" style="background-color: #00529b;">
+  <span class="navbar-brand mb-0 h1" style="color:#ffffff;">UFLifstyle</span>
+</nav>
+<div class="d-flex justify-content-center flex-wrap"style="margin-top:10%;">
+            <h1>UF Lifestyle</h1>
+</div>        
+<form>
+	<br>
+      <div class="d-flex justify-content-center flex-wrap;">
+	      <div class="card" style="width: 24rem; padding:2rem;">
+                <input type="email" placeholder="email" id="email" style="background-color:#e2e2e2;"><br>
+                <input type="password" placeholder="password" id="pswrd"><br>
+                <input type="button" onclick="check(this.form)" value="Login" class="btn btn-primary" style="background-color:#FF8C00; padding-top:.4rem; padding-bottom:.4rem; border-color: #FF8C00;"><br>
+                <input type="button" onclick="createAccount()" value="Create Account" class="btn btn-primary" style="background-color:#00529b; padding-top:.4rem; border-color: #00529b;"><br>
+            </div>
+        </form>
+        <script language="javascript">
+            function check(form) {
+                $.ajax({
+                    type:"POST",
+                    url: "/login",
+                    data: { 
+                        email: $('#email').val(), 
+                        password: $('#pswrd').val() 
+                    },
+                    success: authCallbackFunc
+                });
+            }
+            function authCallbackFunc(response) {
+                if(response.success == false) {
+                    alert("Login Unsuccessful");
+                } else {
+                    window.location.href = 'home';
+                }
+            }
+            function createAccount() {
+                window.location.href = 'create_account';
+            }
+        </script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</div>
+</html>

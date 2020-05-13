@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Reports</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    </head>  
+    <div class="d-flex justify-content-center flex-wrap" style="margin-top:7%;">
+            <h1>Reports</h1>
+        </div>
+        <br>
+    <body>
+            <div class="d-flex justify-content-center flex-wrap" style="margin-bottom:8px;">
+        <b>Select Range for Report: </b></div>
+        <div class="d-flex justify-content-center flex-wrap">
+        <input  type="text" name="daterange"/></div>
+
+        <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+        <br><br><br>
+        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+        <script type="text/javascript">
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                var startDate = start.format('MM:DD:YYYY');
+                var endDate = end.format('MM:DD:YYYY');
+                loadCharts(startDate, endDate);
+            });
+        });
+
+        function loadCharts(start, end) {
+            $.ajax({
+                type:"POST",
+                url: "/reports/get_report_data",
+                data: { 
+                    startDate: start,
+                    endDate: end
+                },
+                success: entryCallbackFunc
+            });
+        }
+        function entryCallbackFunc(response) {
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = response;
+                console.log(data);
+                var classArr = ['Class', 0];
+                var studyArr = ['Studying', 0];
+                var socialArr = ['Social', 0];
+                var exerciseArr = ['Exercise', 0];
+                var leisureArr = ['Leisure', 0];
+                var sleepArr = ['Sleep', 0];
+                var otherArr = ['Other', 0];
+                for(var key in data) {
+                    if(data.hasOwnProperty(key)) {
+                        classArr[1] = classArr[1] + parseInt(data[key]['Class']);
+                        studyArr[1] = studyArr[1] + parseInt(data[key]['Study']);
+                        socialArr[1] = socialArr[1] + parseInt(data[key]['Social']);
+                        exerciseArr[1] = exerciseArr[1] + parseInt(data[key]['Exercise']);
+                        leisureArr[1] = leisureArr[1] + parseInt(data[key]['Leisure']);
+                        sleepArr[1] = sleepArr[1] + parseInt(data[key]['Sleep']);
+                        otherArr[1] = otherArr[1] + parseInt(data[key]['Other']);
+                    }
+                }
+                pieArray = [['Task', 'Hours per Day'], classArr, studyArr, socialArr, exerciseArr, leisureArr, sleepArr, otherArr];
+                var comboArray = [['Day', 'Class', 'Studying', 'Social', 'Exercise', 'Leisure', 'Sleep', 'Other', 'Stress Level']];
+                for(var key in data) {
+                    if(data.hasOwnProperty(key)) {
+                        var temp = [key, parseInt(data[key]['Class']), parseInt(data[key]['Study']), parseInt(data[key]['Social']), parseInt(data[key]['Exercise']), parseInt(data[key]['Leisure']), parseInt(data[key]['Sleep']), parseInt(data[key]['Other']), parseInt(data[key]['Stress'])];
+                        comboArray.push(temp);
+                    }
+                }
+
+                var pieData = google.visualization.arrayToDataTable(pieArray);
+                var comboData = google.visualization.arrayToDataTable(comboArray);
+
+                var pieOptions = {
+                    title: 'My Daily Activities',
+                    is3D: true,
+                };
+        
+                var pieChart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                pieChart.draw(pieData, pieOptions);
+
+                var comboOptions = {
+                    title : 'Daily Activity vs. Stress Level',
+                    vAxis: {title: 'Hours per day/ Stress Level'},
+                    hAxis: {title: 'Day'},
+                    seriesType: 'bars',
+                    series: {7: {type: 'line'}}        
+                };
+
+                var comboChart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+                comboChart.draw(comboData, comboOptions);
+            }
+        }
+
+        </script>
+    </body>
+        
+</html>

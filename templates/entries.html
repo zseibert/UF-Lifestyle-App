@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- This stylesheet is being used for the datepicker. //code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<div class="d-flex justify-content-center flex-wrap" style="margin-top:7%;">
+    <h1>Daily Entries</h1>
+</div>
+<br>
+
+<body>
+    
+       
+    <nav class="navbar fixed-top navbar-light" style="background-color: #00529b;">
+        <span class="navbar-brand mb-0 h1" style="color:#ffffff;">UFLifstyle</span>
+    </nav>
+    <div class="d-flex justify-content-center flex-wrap">
+        <label for="datepicker" style="margin-right:7px; margin-top:5px;"><b>Select Day:</b></label>
+        <input type='text' class='date' id="datepicker"><br>
+    </div>
+    <div style="margin-top:10px;">
+
+        <form id="daily_entry_form">
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#adc404; border-color:#adc404"
+                            id="basic-addon1">Class</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="class">
+                </div>
+
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#03c1b9; border-color:#03c1b9"
+                            id="basic-addon1">Studying</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="study">
+                </div>
+            </div>
+
+            
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#ff5978; border-color:#ff5978"
+                            id="basic-addon1">Social</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="social">
+                </div>
+
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#01a7dd; border-color:#01a7dd"
+                            id="basic-addon1">Exercise</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="exercise">
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#ffcb02; border-color:#ffcb02"
+                            id="basic-addon1">Leisure</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="leisure">
+                </div>
+
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#ae5de0; border-color:#ae5de0"
+                            id="basic-addon1">Sleep</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="sleep">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center flex-wrap">
+                <div class="input-group mb-3" style="width:160px; margin:10px;">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"
+                            style="color:white; background-color:#686868; border-color:#686868"
+                            id="basic-addon1">Other</span>
+                    </div>
+                    <input type="number" class="form-control" value="0" max="24" min="0" id="other">
+                </div>
+            </div>
+    </div>
+
+  
+
+   
+
+    <div class="d-flex justify-content-center my-4">
+        <label for="stressLevel" style="margin-bottom:-5px;">Daily Stress Level</label>
+    </div>
+
+
+    <div class="d-flex justify-content-center my-4">
+        <div class="w-25">
+            <input type="range" class="custom-range" min="0" max="10" id="stresslevel"></div>
+    </div>
+
+    <div class="d-flex justify-content-center my-4">
+            <label for="stressLevel" style="font-size:14px; margin-bottom:-5px; margin-top:-21px; margin-right:120px;">Low</label>
+
+                <label for="stressLevel" style="font-size:14px; margin-bottom:-5px; margin-top:-21px; margin-left:120px;">High</label>
+            </div>
+
+
+    <div class="d-flex justify-content-center my-4">
+        <button class="btn btn-primary" style="width:150px; background-color:#00529b;"
+            onclick="submitDailyActivity(this.form)" value="Submit">Submit</button>
+           
+    </div>
+
+
+    </form>
+  
+
+
+
+    
+    <script language="javascript">
+        function submitDailyActivity(form) {
+            if ((parseInt(document.getElementById('class').value) +
+                parseInt(document.getElementById('study').value) +
+                parseInt(document.getElementById('social').value) +
+                parseInt(document.getElementById('exercise').value) +
+                parseInt(document.getElementById('leisure').value) +
+                parseInt(document.getElementById('sleep').value) +
+                parseInt(document.getElementById('other').value)) > 24) {
+                alert("Daily hours surpass 24")
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/entries/submit_daily_entry",
+                    data: {
+                        date: document.getElementById('datepicker').value,
+                        class: $('#class').val(),
+                        study: $('#study').val(),
+                        social: $('#social').val(),
+                        exercise: $('#exercise').val(),
+                        leisure: $('#leisure').val(),
+                        sleep: $('#sleep').val(),
+                        other: $('#other').val(),
+                        stress: $('#stresslevel').val()
+                    },
+                    success: submitDailyActivityCallbackFunc
+                });
+            }
+        }
+        function submitDailyActivityCallbackFunc(response) {
+            if (response.success == false) {
+                alert("Upload Failed");
+            }
+        }
+        $(function () {
+            const d = new Date();
+            const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+            const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+            const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+            document.getElementById('datepicker').value = `${mo}/${da}/${ye}`;
+            getDailyActivity();
+            $(".date").datepicker({
+                onSelect: function (dateText) {
+                    getDailyActivity();
+                }
+            });
+        });
+
+        function getDailyActivity() {
+            $.ajax({
+                type: "POST",
+                url: "/entries/get_daily_entry",
+                data: {
+                    datepicker: $('#datepicker').val()
+                },
+                success: getDailyActivityCallbackFunc
+            });
+        }
+        function getDailyActivityCallbackFunc(response) {
+            if (response.success == false) {
+                alert("Please enter a valid date");
+            } else {
+                var daily_entry = response;
+                document.getElementById('class').value = response.class;
+                document.getElementById('study').value = response.study;
+                document.getElementById('social').value = response.social;
+                document.getElementById('exercise').value = response.exercise;
+                document.getElementById('leisure').value = response.leisure;
+                document.getElementById('sleep').value = response.sleep;
+                document.getElementById('other').value = response.other;
+                document.getElementById('stresslevel').value = response.stress;
+            }
+        }    
+    </script>
+
+</html>

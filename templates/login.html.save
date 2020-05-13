@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<link rel="stylesheet" href="style_login.css">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    
+</head>  
+    <body>
+	    <div class="h1">
+            <title>LOGIN</title>
+        </div>
+        <br>
+        <form>
+            <div>
+                <input type="email" placeholder="email" id="email"><br>
+                <input type="password" placeholder="password" id="pswrd"><br>
+                <input type="button" onclick="check(this.form)" value="Login"><br>
+                <input type="button" onclick="createAccount()" value="Create Account"><br>
+            </div>
+        </form>
+        <script language="javascript">
+            function check(form) {
+                $.ajax({
+                    type:"POST",
+                    url: "/login",
+                    data: { 
+                        email: $('#email').val(), 
+                        password: $('#pswrd').val() 
+                    },
+                    success: authCallbackFunc
+                });
+            }
+            function authCallbackFunc(response) {
+                if(response.success == true) {
+                    window.location.href = 'home';
+                } else {
+                    alert("fail");
+                }
+            }
+            function createAccount() {
+                window.location.href = 'create_account';
+            }
+        </script>
+    </body>
+</html>

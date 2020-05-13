@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    
+</head>  
+    <body style="background-image: url('https://news.wjct.org/sites/wjct/files/styles/x_large/public/201708/UFcampus.jpg'); background-size:cover;">
+<nav class="navbar fixed-top navbar-light" style="background-color: #00529b;">
+  <span class="navbar-brand mb-0 h1" style="color:#ffffff;">Home</span>
+</nav>
+<div class="d-flex justify-content-center flex-wrap"style="margin-top:10%;">
+    <div class="card" style="width: 20rem; padding: 0rem; color: #00529b;">
+    <div class="card-body" style="text-align: center";>
+            <h5 class="card-title" style="font-weight: bold; font-size: 25pt;">Welcome Gator!</h5>
+        </div>
+    </div>
+</div>        
+<form>
+    <br>
+    <div class="card-deck" style="margin-top:5%">
+        <div class="card" style="width: 24rem; padding:2rem; margin-left:6%; margin-right:2%;">
+          <div class="card-body">
+            <h5 class="card-title">Inputs</h5>
+            <p class="card-text">Update your daily activity.</p>
+            <input type="button" onclick="dailyActivity()" value="Input Activity" class="btn btn-primary" style="background-color:#00529b; padding-top:.4rem; border-color: #00529b;"><br>
+          </div>
+        </div>
+        <div class="card" style="width: 24rem; padding:2rem; margin-left:2%; margin-right:2%;">
+            <div class="card-body">
+              <h5 class="card-title">Report</h5>
+              <p class="card-text">View your activity report.</p>
+              <input type="button" onclick="loadReports()" value="View Report" class="btn btn-primary" style="background-color:#00529b; padding-top:.4rem; border-color: #00529b;"><br>
+            </div>
+          </div>
+          <div class="card" style="width: 24rem; padding:2rem; margin-left:2%; margin-right:6%;">
+            <div class="card-body">
+              <h5 class="card-title">Goals</h5>
+              <p class="card-text">Set personalized goals.</p>
+              <input type="button" onclick="setGoals()" value="Set Goals" class="btn btn-primary" style="background-color:#00529b; padding-top:.4rem; border-color: #00529b;"><br>
+            </div>
+          </div>
+      </div>
+    </form>
+       <script language="javascript">
+            function dailyActivity() {
+                window.location.href = 'entries';
+            }           
+            function loadReports() {
+                window.location.href = 'reports';
+            }
+            function setGoals() {
+                window.location.href = 'goals';
+            }
+       </script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</div>
+</html>
